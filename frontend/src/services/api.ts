@@ -4,7 +4,34 @@ import type {
   Stats, TranscribeResult, TranslateResult, TranscriptLine, VoiceIdResult,
 } from '../types'
 
-export const http = axios.create({ baseURL: '', timeout: 15 * 60 * 1000 })
+export const API_BASE = ((import.meta.env.VITE_API_URL as string | undefined) || '').replace(/\/+$/, '')
+
+export function apiUrl(path: string): string {
+  if (!path || !API_BASE || /^(https?:|blob:|data:)/i.test(path)) return path
+  return `${API_BASE}${path.startsWith('/') ? '' : '/'}${path}`
+}
+
+const URL_KEYS = new Set(['audio_url', 'input_audio_url', 'original_audio_url'])
+function rewriteOutputUrls(val: unknown): unknown {
+  if (!API_BASE || !val || typeof val !== 'object') return val
+  if (Array.isArray(val)) return val.map(rewriteOutputUrls)
+  const obj = val as Record<string, unknown>
+  for (const k of Object.keys(obj)) {
+    const v = obj[k]
+    if (URL_KEYS.has(k) && typeof v === 'string' && v.startsWith('/')) {
+      obj[k] = apiUrl(v)
+    } else if (v && typeof v === 'object') {
+      rewriteOutputUrls(v)
+    }
+  }
+  return obj
+}
+
+export const http = axios.create({ baseURL: API_BASE, timeout: 15 * 60 * 1000 })
+http.interceptors.response.use(res => {
+  if (API_BASE && res.data && typeof res.data === 'object') rewriteOutputUrls(res.data)
+  return res
+})
 
 /** Turn any axios/FastAPI error into a readable message. */
 export function errorMessage(err: unknown): string {
@@ -59,7 +86,7 @@ export const api = {
     http.post<{ transcript: TranscriptLine[] }>(`/api/meeting/${id}/translate`, { target_language }).then(r => r.data),
   resummarize: (id: string, output_language: string) =>
     http.post<{ analysis: MeetingAnalysis }>(`/api/meeting/${id}/summarize`, { output_language }).then(r => r.data),
-  reportUrl: (id: string, format: 'md' | 'html' | 'json') => `/api/meeting/${id}/report?format=${format}`,
+  reportUrl: (id: string, format: 'md' | 'html' | 'json') => apiUrl(`/api/meeting/${id}/report?format=${format}`),
 
   analyzeAudio: (file: Blob) => http.post<AudioAnalysis>('/api/audio/analyze', form(file)).then(r => r.data),
 

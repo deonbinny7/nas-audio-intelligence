@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { api } from '../services/api'
+import { API_BASE, api } from '../services/api'
 import type { Job } from '../types'
 
 /** Follow a background job over WebSocket, with HTTP polling as a fallback. */
@@ -21,8 +21,10 @@ export function useJob(jobId: string | null) {
     }
     let ws: WebSocket | null = null
     try {
-      const proto = location.protocol === 'https:' ? 'wss' : 'ws'
-      ws = new WebSocket(`${proto}://${location.host}/ws/jobs/${jobId}`)
+      const wsBase = API_BASE
+        ? API_BASE.replace(/^http:/i, 'ws:').replace(/^https:/i, 'wss:')
+        : `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}`
+      ws = new WebSocket(`${wsBase}/ws/jobs/${jobId}`)
       ws.onmessage = e => { if (!closed) setJob(JSON.parse(e.data)) }
       ws.onerror = () => startPolling()
       ws.onclose = () => { if (!closed) startPolling() }
