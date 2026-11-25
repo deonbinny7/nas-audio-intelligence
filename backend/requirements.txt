@@ -1,0 +1,27 @@
+# NAS backend — versions tested together (Python 3.13, CPU only)
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.34
+pydantic==2.14.4
+python-dotenv==1.2.4
+sqlalchemy==2.1.9
+
+# Speech recognition
+faster-whisper==1.2.1
+
+# Audio / DSP
+librosa==1.0.1
+numpy==2.5.5
+scipy==1.18.1
+soundfile==0.14.0
+noisereduce==3.0.3
+
+# Speaker recognition (ECAPA-TDNN) + clustering
+speechbrain==1.1.2
+scikit-learn==1.9.1
+torch==2.15.0
+torchaudio==2.11.1
+
+# Translation / LLM / TTS
+google-genai==3.6.1
+edge-tts==7.3.1

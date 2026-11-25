@@ -1,0 +1,4 @@
+# OPTIONAL: pyannote speaker diarization (needs HF_TOKEN + accepting model terms on
+# huggingface.co/pyannote/speaker-diarization-3.1 and /segmentation-3.0).
+# NAS works without it (SpeechBrain ECAPA-TDNN clustering is the default).
+pyannote.audio

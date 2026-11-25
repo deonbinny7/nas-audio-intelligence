@@ -1,0 +1,58 @@
+# Secrets & environment variables
+.env
+.env.*
+backend/.env
+backend/.env.*
+!.env.example
+!backend/.env.example
+*.pem
+*.key
+*credentials*.json
+*service-account*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.Python
+build/
+dist/
+venv/
+.venv/
+env/
+backend/venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ML Models, Audio Runtime Data & Databases
+backend/pretrained_models/
+backend/uploads/*
+backend/outputs/*
+backend/data/*
+!backend/uploads/.gitkeep
+!backend/outputs/.gitkeep
+!backend/data/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+
+# Logs & OS / Editor metadata
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

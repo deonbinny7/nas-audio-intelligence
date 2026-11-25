@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans Malayalam", "Noto Sans Devanagari", "Noto Sans Tamil", "Noto Sans Kannada", "Noto Sans Telugu", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  --color-nas-bg: #080808;
+  --color-nas-bg-2: #0d0c0b;
+  --color-nas-surface: #14110f;
+  --color-nas-elevated: #1b1714;
+
+  --color-nas-orange: #e87528;
+  --color-nas-burnt: #c85a1b;
+  --color-nas-bright: #ff963f;
+  --color-nas-amber: #ffb45c;
+  --color-nas-soft: #f5c08c;
+  --color-nas-pale: #fce0c4;
+
+  --color-nas-success: #43c995;
+  --color-nas-warning: #f0b65e;
+  --color-nas-error: #f47769;
+}
+
+:root {
+  color-scheme: dark;
+  --bg-main: #080808;
+  --bg-secondary: #0d0c0b;
+  --surface-primary: #14110f;
+  --surface-elevated: #1b1714;
+
+  --text-primary: #f7f3ee;
+  --text-secondary: #b9aea4;
+  --text-muted: #82776f;
+  --text-disabled: #5f5852;
+
+  --border-neutral: rgba(255, 255, 255, 0.075);
+  --border-orange: rgba(232, 117, 40, 0.22);
+  --border-active: rgba(255, 150, 63, 0.55);
+
+  --orange-primary: #e87528;
+  --orange-burnt: #c85a1b;
+  --orange-bright: #ff963f;
+  --orange-amber: #ffb45c;
+  --orange-soft: #f5c08c;
+  --orange-pale: #fce0c4;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #080808;
+  color: #f7f3ee;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(ellipse at 80% 0%, rgba(232, 117, 40, 0.12), transparent 42%),
+    radial-gradient(ellipse at 10% 100%, rgba(200, 90, 27, 0.07), transparent 38%),
+    radial-gradient(ellipse at 50% 45%, rgba(255, 180, 92, 0.02), transparent 55%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(232, 117, 40, 0.32);
+  color: #f7f3ee;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(247, 243, 238, 0.14) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(247, 243, 238, 0.12);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 117, 40, 0.45);
+}
+
+/* Dark Cinematic Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 150, 63, 0.16);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.32),
+    0 0 24px rgba(232, 117, 40, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-elevated {
+  background: rgba(27, 23, 20, 0.72);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid rgba(232, 117, 40, 0.25);
+  border-radius: 22px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.48),
+    0 0 36px rgba(232, 117, 40, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.glass-panel-2 {
+  background: rgba(20, 17, 15, 0.72);
+  backdrop-filter: blur(18px) saturate(135%);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-control {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 150, 63, 0.2);
+}
+
+.glass-hover {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+
+.glass-hover:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 150, 63, 0.45);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(232, 117, 40, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-logo-frame {
+  background: rgba(255, 255, 255, 0.065);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(232, 117, 40, 0.28);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(232, 117, 40, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 150, 63, 0.16);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.32),
+    0 0 24px rgba(232, 117, 40, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #82776f;
+}
+
+.input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(13, 12, 11, 0.85);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.875rem;
+  color: #f7f3ee;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.input::placeholder {
+  color: #5f5852;
+}
+
+.input:hover {
+  border-color: rgba(232, 117, 40, 0.32);
+}
+
+.input:focus {
+  border-color: rgba(255, 150, 63, 0.6);
+  background: #14110f;
+  box-shadow: 0 0 0 3px rgba(232, 117, 40, 0.16);
+}
+
+.gradient-text {
+  background: linear-gradient(125deg, #fce0c4 0%, #ffb45c 40%, #e87528 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes wave-pulse {
+  0%, 100% {
+    transform: scaleY(0.35);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-wave-bar {
+  animation: wave-pulse 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
